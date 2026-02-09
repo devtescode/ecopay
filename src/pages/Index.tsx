@@ -15,7 +15,7 @@ import {
 const STORAGE_KEY_MESSAGES = "ecopay-chat-messages";
 const STORAGE_KEY_CREDITS = "ecopay-credits";
 
-const DEFAULT_CREDITS: UserCredits = { total: 250, pending: 0, redeemed: 0 };
+const DEFAULT_CREDITS: UserCredits = { total: 0, pending: 0, redeemed: 0 };
 
 const WELCOME_MESSAGE = createMessage(
   "ai",

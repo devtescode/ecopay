@@ -23,17 +23,32 @@ type Intent =
   | "redemption_request"
   | "human_support"
   | "greeting"
+  | "polite"       // ✅ new intent for polite messages
   | "unrelated";
 
 function detectIntent(message: string): Intent {
   const lower = message.toLowerCase();
 
-  if (/^(hi|hello|hey|good\s*(morning|afternoon|evening)|howdy)/i.test(lower)) return "greeting";
-  if (/human|agent|support|speak.*person|talk.*someone/i.test(lower)) return "human_support";
-  if (/redeem|cash\s*out|withdraw|reward|payout/i.test(lower)) return "redemption_request";
-  if (/submit|drop.*off|recycle.*plastic|bring.*plastic|how.*submit|\d+\s*plastic/i.test(lower)) return "plastic_submission";
-  if (/credit|balance|point|how\s*much|earned/i.test(lower)) return "credit_inquiry";
-  if (/recycle|recycling|plastic|waste|environment|ecopay|location|where|address|drop/i.test(lower)) return "recycling_question";
+  if (/^(hi|hello|hey|good\s*(morning|afternoon|evening)|howdy)/i.test(lower))
+    return "greeting";
+
+  if (/thank\s*you|thanks|thx/i.test(lower)) // ✅ detect polite messages
+    return "polite";
+
+  if (/human|agent|support|speak.*person|talk.*someone/i.test(lower))
+    return "human_support";
+
+  if (/redeem|cash\s*out|withdraw|reward|payout/i.test(lower))
+    return "redemption_request";
+
+  if (/submit|drop.*off|recycle.*plastic|bring.*plastic|how.*submit|\d+\s*plastic/i.test(lower))
+    return "plastic_submission";
+
+  if (/credit|balance|point|how\s*much|earned/i.test(lower))
+    return "credit_inquiry";
+
+  if (/recycle|recycling|plastic|waste|environment|ecopay|location|where|address|drop/i.test(lower))
+    return "recycling_question";
 
   return "unrelated";
 }
@@ -56,6 +71,12 @@ export function generateAIResponse(
           "Hello! 🌿 Welcome to Ecopay! I'm your recycling assistant. I can help you submit plastics, check your credits, or redeem your rewards. What would you like to do today?",
       };
 
+    case "polite": // ✅ new case for polite messages
+      return {
+        response:
+          "You're welcome! 🌿 Keep recycling with Ecopay! Would you like to submit plastics or check your credits?",
+      };
+
     case "plastic_submission": {
       const qty = extractQuantity(message);
       if (!qty) {
@@ -73,7 +94,10 @@ export function generateAIResponse(
       const cashValue = qty * NAIRA_PER_PLASTIC;
       return {
         response: `Great! You're submitting **${qty} plastics**.\n\n💰 You'll earn **${creditsEarned} credits** (₦${cashValue.toLocaleString()}).\n\nPlease drop off your plastics at our collection center in **Ilara Mokin, Ondo State**. Credits will be added after verification. ✅`,
-        updatedCredits: { pending: credits.pending + creditsEarned },
+        updatedCredits: { 
+          pending: credits.pending + creditsEarned,
+          total: credits.total + creditsEarned
+        },
       };
     }
 

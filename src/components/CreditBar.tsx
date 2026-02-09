@@ -5,7 +5,7 @@ interface CreditBarProps {
   credits: UserCredits;
 }
 
-const GOAL = 1000;
+const GOAL = 10000;
 
 const CreditBar = ({ credits }: CreditBarProps) => {
   const pct = Math.min((credits.total / GOAL) * 100, 100);
@@ -16,7 +16,7 @@ const CreditBar = ({ credits }: CreditBarProps) => {
         <div className="flex items-center gap-1.5">
           <TrendingUp className="w-4 h-4 text-primary" />
           <span className="text-xs font-semibold text-foreground">
-            {credits.total} / {GOAL} credits
+            {credits.total}
           </span>
         </div>
         <span className="text-[10px] text-muted-foreground">
@@ -31,12 +31,13 @@ const CreditBar = ({ credits }: CreditBarProps) => {
       </div>
       <p className="text-[10px] text-muted-foreground mt-1">
         {credits.total >= GOAL
-          ? "🎉 You're eligible for redemption!"
-          : `You need ${GOAL - credits.total} more credits to redeem.`}
+          ? "🎉 You're eligible!"
+          : `You need ${GOAL - credits.total} more Keep recycling! ♻️`}
+        
       </p>
       {credits.pending > 0 && (
         <p className="text-[10px] text-muted-foreground">
-          ⏳ {credits.pending} credits pending verification
+          ⏳ {credits.pending} recycling submited
         </p>
       )}
     </div>
