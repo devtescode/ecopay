@@ -1,0 +1,180 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --background: 140 20% 97%;
+    --foreground: 150 30% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 150 30% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 150 30% 10%;
+
+    --primary: 152 60% 38%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 145 30% 92%;
+    --secondary-foreground: 150 30% 15%;
+
+    --muted: 140 15% 93%;
+    --muted-foreground: 150 10% 45%;
+
+    --accent: 210 70% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 140 15% 88%;
+    --input: 140 15% 88%;
+    --ring: 152 60% 38%;
+
+    --radius: 1rem;
+
+    /* Custom Ecopay tokens */
+    --eco-green: 152 60% 38%;
+    --eco-green-light: 148 45% 92%;
+    --eco-blue: 210 70% 50%;
+    --eco-blue-light: 210 60% 93%;
+    --eco-gold: 42 90% 55%;
+    --eco-surface: 140 20% 99%;
+    --eco-chat-bg: 140 15% 95%;
+
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 150 20% 6%;
+    --foreground: 140 15% 95%;
+
+    --card: 150 20% 9%;
+    --card-foreground: 140 15% 95%;
+
+    --popover: 150 20% 9%;
+    --popover-foreground: 140 15% 95%;
+
+    --primary: 152 55% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 150 20% 15%;
+    --secondary-foreground: 140 15% 90%;
+
+    --muted: 150 15% 15%;
+    --muted-foreground: 140 10% 55%;
+
+    --accent: 210 65% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 150 15% 18%;
+    --input: 150 15% 18%;
+    --ring: 152 55% 45%;
+
+    --eco-green: 152 55% 45%;
+    --eco-green-light: 150 30% 15%;
+    --eco-blue: 210 65% 55%;
+    --eco-blue-light: 210 40% 15%;
+    --eco-gold: 42 85% 50%;
+    --eco-surface: 150 20% 8%;
+    --eco-chat-bg: 150 15% 10%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer utilities {
+  .eco-gradient {
+    background: linear-gradient(135deg, hsl(var(--eco-green)), hsl(152 65% 30%));
+  }
+
+  .eco-bubble-ai {
+    background-color: hsl(var(--eco-green-light));
+    color: hsl(var(--foreground));
+  }
+
+  .eco-bubble-user {
+    background-color: hsl(var(--eco-blue));
+    color: hsl(var(--accent-foreground));
+  }
+
+  .eco-chat-surface {
+    background-color: hsl(var(--eco-chat-bg));
+  }
+
+  @keyframes bounce-dot {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-6px); }
+  }
+
+  .typing-dot {
+    animation: bounce-dot 1.4s ease-in-out infinite;
+  }
+  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.3s ease-out;
+  }
+
+  @keyframes slide-in-right {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .animate-slide-in-right {
+    animation: slide-in-right 0.3s ease-out;
+  }
+
+  @keyframes slide-in-left {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .animate-slide-in-left {
+    animation: slide-in-left 0.3s ease-out;
+  }
+}
