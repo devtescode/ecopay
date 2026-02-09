@@ -14,7 +14,7 @@ export interface UserCredits {
 const CREDIT_PER_PLASTIC = 1;
 const NAIRA_PER_PLASTIC = 0.5;
 const MIN_SUBMISSION = 100;
-const REDEMPTION_THRESHOLD = 1000;
+const REDEMPTION_THRESHOLD = 10000;
 
 type Intent =
   | "recycling_question"
